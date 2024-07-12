@@ -11,9 +11,20 @@
             </ul>
         </div>
     <div class="container-fluid pb-5">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="bg-white p-3 rounded shadow-sm border">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="upload-tab" data-toggle="tab" href="#upload" role="tab" aria-controls="upload" aria-selected="true">Upload File</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="google-drive-tab" data-toggle="tab" href="#google-drive" role="tab" aria-controls="google-drive" aria-selected="false">Google Drive</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="url-tab" data-toggle="tab" href="#url" role="tab" aria-controls="url" aria-selected="false">Fetch from URL</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="upload" role="tabpanel" aria-labelledby="upload-tab">
+                <div class="bg-white p-3 rounded shadow-sm no-top-border">
                     <div class="dropzone d-block">
                         <label for="files" class="dropzone-container" id="dropzone">
                             <div class="file-icon"><i class="fa-solid fa-file-circle-plus text-primary"></i></div>
@@ -31,6 +42,32 @@
                     </div>
                     <div class="progress mt-3">
                         <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="google-drive" role="tabpanel" aria-labelledby="google-drive-tab">
+                <div class="bg-white p-3 rounded shadow-sm no-top-border ">
+                    <h5>Fetch file from Google Drive</h5>
+                    <div class="form-group">
+                        <label for="file-url">Enter Google Drive Public URL:</label>
+                        <input type="text" id="google-file-url" class="form-control" placeholder="Enter the file URL">
+                    </div>
+                    <button type="button" id="fetch-google-drive-btn" class="btn btn-primary custom-browse-btn">Fetch File from Google Drive</button>
+                    <div class="progress mt-3">
+                        <div id="google-progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="url" role="tabpanel" aria-labelledby="url-tab">
+                <div class="bg-white p-3 rounded shadow-sm no-top-border">
+                    <h5>Fetch file from URL</h5>
+                    <div class="form-group">
+                        <label for="file-url">Enter URL:</label>
+                        <input type="text" id="url-file-url" class="form-control" placeholder="Enter the file URL">
+                    </div>
+                    <button type="button" id="fetch-url-btn" class="btn btn-primary custom-browse-btn">Fetch File from URL</button>
+                    <div class="progress mt-3">
+                        <div id="url-progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
                     </div>
                 </div>
             </div>

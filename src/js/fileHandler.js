@@ -192,4 +192,77 @@ $(document).ready(function() {
             }
         });
     });
+
+    $('#fetch-google-drive-btn').on('click', function(event) {
+        event.preventDefault();
+        var fileURL = $('#google-file-url').val();
+        $('#google-progress-bar').css('width', '0%').attr('aria-valuenow', 0).text('0%');
+
+        $.ajax({
+            url: 'files/getGoogleFile.php',
+            type: 'POST',
+            data: { fileURL: fileURL },
+            xhr: function() {
+                var xhr = new XMLHttpRequest();
+                xhr.upload.addEventListener('progress', function(event) {
+                    if (event.lengthComputable) {
+                        var percentComplete = Math.round((event.loaded / event.total) * 100);
+                        $('#google-progress-bar').css('width', percentComplete + '%').attr('aria-valuenow', percentComplete).text(percentComplete + '%');
+                    }
+                }, false);
+                return xhr;
+            },
+            success: function(response) {
+                var jsonResponse = JSON.parse(response);
+                if (jsonResponse.status === 'progress') {
+                    $('#google-progress-bar').css('width', jsonResponse.progress + '%').attr('aria-valuenow', jsonResponse.progress).text(jsonResponse.progress + '%');
+                } else if (jsonResponse.status === 'success') {
+
+                } else if (jsonResponse.status === 'error') {
+                    showModal(jsonResponse.message);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                showModal('Error: ' + textStatus);
+            }
+        });
+    });
+
+    $('#fetch-url-btn').on('click', function(event) {
+        event.preventDefault();
+        var fileURL = $('#url-file-url').val();
+        $('#url-progress-bar').css('width', '0%').attr('aria-valuenow', 0).text('0%');
+
+        $.ajax({
+            url: 'files/getURLFile.php',
+            type: 'POST',
+            data: { fileURL: fileURL },
+            xhr: function() {
+                var xhr = new XMLHttpRequest();
+                xhr.addEventListener('progress', function(event) {
+                    if (event.lengthComputable) {
+                        var percentComplete = Math.round((event.loaded / event.total) * 100);
+                        $('#url-progress-bar').css('width', percentComplete + '%').attr('aria-valuenow', percentComplete).text(percentComplete + '%');
+                    }
+                }, false);
+                return xhr;
+            },
+            success: function(response) {
+                var jsonResponse = JSON.parse(response);
+                if (jsonResponse.status === 'progress') {
+                    $('#url-progress-bar').css('width', jsonResponse.progress + '%').attr('aria-valuenow', jsonResponse.progress).text(jsonResponse.progress + '%');
+                } else if (jsonResponse.status === 'success') {
+                    $('#url-progress-bar').css('width', '0%').attr('aria-valuenow', 0).text('0%');
+
+                } else if (jsonResponse.status === 'error') {
+                    showModal(jsonResponse.message);
+                    $('#url-progress-bar').css('width', '0%').attr('aria-valuenow', 0).text('0%');
+
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                showModal('Error: ' + textStatus);
+            }
+        });
+    });
 });

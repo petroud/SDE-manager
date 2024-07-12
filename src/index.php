@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +18,20 @@
             background-color: white; /* Light grey background */
             padding-top: 56px; /* Adjust according to the height of the navbar */
 
+        }
+        .no-top-border{
+            border: .1px solid #DBE0E4;
+            border-top: none !important;
+            border-radius: 0px 0px 6px 6px !important;
+        }
+        .nav-tabs .nav-link {
+            color: #3C5A80 !important;
+        }
+        .nav-tabs .nav-link:hover {
+            color: #5c7da8;
+        }
+        .nav-tabs .nav-link.active {
+            color: #fff;
         }
         .navbar {
             background-color: #3C5A80; /* Blue navbar */
