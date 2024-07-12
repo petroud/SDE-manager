@@ -42,11 +42,27 @@
             color: white;
             text-align: center;
             height: 1.5em;
-
+            width: 100%;
+            flex-shrink: 0;
+        }
+        .text-center {
+            text-align: center;
+            word-wrap: break-word; /* Ensure long words break and wrap */
+            overflow-wrap: break-word; /* Ensure overflow words break and wrap */
         }
         .navbar-brand img {
             max-height: 33px; /* Adjust the logo size */
             margin-right: 10px;
+        }
+        @media (max-width: 600px) {
+            footer {
+                height: 3em;
+            }
+
+            .text-center small {
+                font-size: 0.7em;
+                padding: 0 10px; /* Add padding to ensure the text is not touching the edges */
+            }
         }
     </style>
      <style>
@@ -61,7 +77,7 @@
         .file-item {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             border: 1px solid #ccc;
             padding: 3px;
             margin: 5px;;
@@ -75,12 +91,18 @@
         .file-icon {
             width: 40px;
             height: 40px;
+            margin-left: 10px;
             color: #3C5A80;
             margin-top: 15px;
         }
 
+       
         .file-name {
             font-size: 12px;
+            white-space: nowrap;
+            margin-left: -15px;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .table th, .table td {
