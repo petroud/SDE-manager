@@ -1,6 +1,6 @@
 <div class="container mt-1">
     <h2><strong>Dataset Submission</strong></h1>
-        <div class="mb-4 mt-4 font-weight-normal alert alert-dark">
+        <div class="mb-4 mt-4 font-weight-normal alert alert-dark small">
         <strong>General Information about Dataset Submissions</strong> 
             <ul>
                 <li>Datasets submitted here are available to whoever uses this specific instance of the SDE Manager, <strong>so be careful about privacy-oriented datasets.</strong></li>
@@ -84,7 +84,7 @@
     </table>
 
     <!-- Modal for viewing file content -->
-    <div class="modal fade alert alert-danger" id="viewFileModal" tabindex="-1" aria-labelledby="viewFileModalLabel" aria-hidden="true">
+    <div class="modal fade" id="viewFileModal" tabindex="-1" aria-labelledby="viewFileModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg ">
             <div class="modal-content">
                 <div class="modal-header">
@@ -100,7 +100,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
+    <div class="modal fade alert alert-danger" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

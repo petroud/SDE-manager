@@ -50,7 +50,39 @@
         }
     </style>
      <style>
-        
+        .file-list {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ccc;
+            padding: 3px;
+            margin: 5px;;
+            height: 40px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: calc(33.333% - 20px);
+            min-width: 150px; 
+        }
+
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            color: #3C5A80;
+            margin-top: 15px;
+        }
+
+        .file-name {
+            font-size: 12px;
+        }
+
         .table th, .table td {
             text-align: center;
             vertical-align: middle;

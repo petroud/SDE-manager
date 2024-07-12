@@ -47,7 +47,10 @@ $(document).ready(function() {
 
     function updateFileList(files) {
         $.each(files, function(i, file) {
-            fileList.append('<li>' + file.name + '</li>');
+            var listItem = $('<li>').addClass('file-item');
+            listItem.html(`<div class="file-icon"><i class="fa-solid fa-file"  style="color: #3C5A80;"></i></div>
+                           <span class="file-name">${file.name}</span>`);
+            fileList.append(listItem);
         });
     }
 
@@ -124,10 +127,10 @@ $(document).ready(function() {
                 var files = JSON.parse(response); 
                 files.forEach(function(file) { 
                     $('#datasets-table-body').append( 
-                        `<tr><td>${file.filename}</td> 
-                             <td>${file.size}</td> 
-                             <td>${file.datetime}</td>  
-                             <td class='action-column'>
+                        `<tr><td data-label='Dataset Name'>${file.filename}</td> 
+                             <td data-label='Size'>${file.size}</td> 
+                             <td data-label='Date & Time'>${file.datetime}</td>  
+                             <td data-label='' class='action-column'>
                                 <button class='btn btn-info btn-sm custom-browse-btn view-button' data-filename='${file.filename}'>
                                     <i class='fa fa-eye' style='color: white;'></i>
                                 </button>
