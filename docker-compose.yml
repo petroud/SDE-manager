@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+  apache:
+    build:
+       context: . 
+       dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./apache_init/php.ini:/usr/local/etc/php/php.ini
