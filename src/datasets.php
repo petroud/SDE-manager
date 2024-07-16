@@ -110,9 +110,13 @@
                         <button class='btn btn-info btn-sm custom-browse-btn view-button' data-filename='{$file}'>
                             <i class='fa fa-eye' style='color: white;'></i>
                         </button>
+                        <button class='btn btn-danger btn-sm custom-browse-btn structure-button' data-filename='{$file}'>
+                            <i class='fa fa-wrench'></i>
+                        </button>
                         <button class='btn btn-danger btn-sm custom-upload-btn delete-button' data-filename='{$file}'>
                             <i class='fa fa-trash'></i>
-                        </button></td>
+                        </button>
+                        </td>
                     </tr>";
                     }
             }
@@ -120,12 +124,13 @@
         </tbody>
     </table>
 
+  
     <!-- Modal for viewing file content -->
     <div class="modal fade" id="viewFileModal" tabindex="-1" aria-labelledby="viewFileModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg ">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="viewFileModalLabel">File - First 5 Lines</h5>
+                    <h5 class="modal-title" id="viewFileModalLabel">File - First 20 Lines</h5>
                 </div>
                 <div class="modal-body" id="file-content">
                     <!-- File content will be loaded here -->
@@ -136,6 +141,27 @@
             </div>
         </div>
     </div>
+
+      <!-- Modal for setting dataset structure -->
+      <div class="modal fade" id="structureModal" tabindex="-1" aria-labelledby="structureModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="structureModalLabel"></h5>
+                </div>
+                <div class="modal-body" id="dataset-structure">
+                    <div>
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <div class="modal fade alert alert-danger" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

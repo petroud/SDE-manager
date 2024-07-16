@@ -10,7 +10,7 @@ if (isset($_GET['filename'])) {
         $file = fopen($filePath, "r");
         if ($file) {
             $count = 0;
-            while (($line = fgets($file)) !== false && $count < 5) {
+            while (($line = fgets($file)) !== false && $count < 20) {
                 $lines[] = htmlspecialchars($line);
                 $count++;
             }

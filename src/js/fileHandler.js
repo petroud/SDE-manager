@@ -180,7 +180,6 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.view-button', function() {
-        console.log('Run');
         var filename = $(this).data('filename');
         $.ajax({
             url: 'files/view.php',
@@ -189,6 +188,20 @@ $(document).ready(function() {
             success: function(response) {
                 $('#file-content').html(response);
                 $('#viewFileModal').modal('show');
+            }
+        });
+    });
+
+    $(document).on('click', '.structure-button', function() {
+        var filename = $(this).data('filename');
+        $.ajax({
+            url: 'files/getDatasetStructure.php',
+            type: 'GET',
+            data: { filename: filename },
+            success: function(response) {
+                $('#structureModalLabel').html("Dataset Structure: <strong>"+filename+"</strong>");
+                $('#dataset-structure').html(response);
+                $('#structureModal').modal('show');
             }
         });
     });
