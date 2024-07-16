@@ -7,7 +7,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/logo.png" type="image/png">
-    <title>SDE Manager | Index</title>
+    <?php
+        $page = isset($_GET['page']) ? $_GET['page'] : 'main';
+        $title = ucfirst($page);
+        echo '<title>SDE Manager | '.$title.'</title>';
+    ?>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -68,7 +72,7 @@
             overflow-wrap: break-word; /* Ensure overflow words break and wrap */
         }
         .navbar-brand img {
-            max-height: 33px; /* Adjust the logo size */
+            max-height: 50px; /* Adjust the logo size */
             margin-right: 10px;
         }
         @media (max-width: 600px) {
@@ -271,6 +275,7 @@
     <nav class="navbar navbar-expand-lg fixed-top">
             <div class="container-fluid">
             <a class="navbar-brand" href="index.php">
+                <img src="img/logo.png" alt="SDE Logo">
                 SDE Manager
             </a>                
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
