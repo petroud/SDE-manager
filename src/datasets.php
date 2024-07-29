@@ -123,7 +123,7 @@
             ?>
         </tbody>
     </table>
-
+    </div>
   
     <!-- Modal for viewing file content -->
     <div class="modal fade" id="viewFileModal" tabindex="-1" aria-labelledby="viewFileModalLabel" aria-hidden="true">
@@ -143,24 +143,35 @@
     </div>
 
       <!-- Modal for setting dataset structure -->
-      <div class="modal fade" id="structureModal" tabindex="-1" aria-labelledby="structureModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg ">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="structureModalLabel"></h5>
-                </div>
-                <div class="modal-body" id="dataset-structure">
-                    <div>
-                        <input type="text">
+        <div class="modal fade" id="structureModal" tabindex="-1" aria-labelledby="structureModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="structureModalLabel">Dataset Structure</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <div class="modal-body" id="dataset-structure">
+                        <form id="datasetStructureForm">
+                            <div class="form-group">
+                                <label for="datasetKey">Dataset Key</label>
+                                <input type="text" class="form-control" id="datasetKey" pattern="[A-Za-z0-9]+" title="Alphanumeric only" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="valueKey">Value Key</label>
+                                <input type="text" class="form-control" id="valueKey" pattern="[A-Za-z0-9]+" title="Alphanumeric only" required>
+                                <input type="text" class="form-control" id="filenameStructure" pattern="[A-Za-z0-9]+" title="Alphanumeric only" hidden>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="saveChangesButton">Save changes</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
 
 
     <div class="modal fade alert alert-danger" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
@@ -181,5 +192,3 @@
         </div>
     </div>
     <script src='js/fileHandler.js'></script>
-
-</div>
