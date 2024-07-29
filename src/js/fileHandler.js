@@ -10,6 +10,7 @@ function showModal(message) {
     }, 5000);
 }
 
+
 function isApprovedFile(fileName) {
     const fileExtension = fileName.split('.').pop().toLowerCase();
 
@@ -199,12 +200,50 @@ $(document).ready(function() {
             type: 'GET',
             data: { filename: filename },
             success: function(response) {
+                document.getElementById("filenameStructure").value = filename;
                 $('#structureModalLabel').html("Dataset Structure: <strong>"+filename+"</strong>");
-                $('#dataset-structure').html(response);
+                //$('#dataset-structure').html(response);
                 $('#structureModal').modal('show');
+                $('#datasetKey').value = "";
+                $('#valueKey').value = "";
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                $('#structureModal').modal('hide');
+                showModal("Error while fetching dataset structure: <strong> " + jqXHR.responseText+" </strong>");
             }
         });
     });
+
+    $('#saveChangesButton').on('click', function() {
+        var datasetKey = $('#datasetKey').val();
+        var valueKey = $('#valueKey').val();
+        var filename = document.getElementById("filenameStructure").value;
+        if (datasetKey.match(/^[A-Za-z0-9]+$/) && valueKey.match(/^[A-Za-z0-9]+$/)) {
+            $.ajax({
+                url: 'files/setDatasetStructure.php',
+                type: 'POST',
+                data: {
+                    filename: filename,
+                    datasetKey: datasetKey,
+                    valueKey: valueKey
+                },
+                success: function(response) {
+                    $('#structureModal').modal('hide');
+                    $('#datasetKey').value = "";
+                    $('#valueKey').value = "";
+                    showSuccessBar("Dataset structure for "+filename+"s update succesfully");
+                }
+            });
+        } else {
+            alert('Please enter valid alphanumeric values.');
+        }
+    });
+
+    $('#structureModal').on('hidden.bs.modal', function () {
+        $('#datasetKey').val('');
+        $('#valueKey').val('');
+    });
+
 
     $('#fetch-google-drive-btn').on('click', function(event) {
         event.preventDefault();
