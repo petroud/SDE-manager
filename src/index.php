@@ -75,6 +75,22 @@
             max-height: 50px; /* Adjust the logo size */
             margin-right: 10px;
         }
+
+        #successBar {
+            position: fixed;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 25px;
+            margin: auto;
+            width: 100%;
+            z-index: 1050;
+            transition: bottom 0.5s;
+            text-align: center; /* Center align text */
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
         @media (max-width: 600px) {
             footer {
                 height: 3em;
@@ -83,6 +99,15 @@
             .text-center small {
                 font-size: 0.7em;
                 padding: 0 10px; /* Add padding to ensure the text is not touching the edges */
+            }
+        }
+        @media (max-width: 600px) {
+            #successBar {
+                height: 50px;
+            }
+
+            #successBar .text-center{
+                text-wrap: wrap;
             }
         }
     </style>
@@ -125,6 +150,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        
 
         .table th, .table td {
             text-align: center;
@@ -271,6 +297,7 @@
 <body>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
 
     <nav class="navbar navbar-expand-lg fixed-top">
             <div class="container-fluid">
@@ -285,7 +312,7 @@
                     <ul class="navbar-nav">
                         <?php
                         $page = isset($_GET['page']) ? $_GET['page'] : 'main';
-                        $pages = ['main' => 'Main', 'datasets' => 'Datasets', 'console' => 'SDE Console', 'monitoring' => 'Monitoring'];
+                        $pages = ['main' => 'Main', 'datasets' => 'Datasets', 'console' => 'SDE Console', 'monitoring' => 'Monitoring', 'experiments'=>'Experiments'];
                         foreach ($pages as $key => $value) {
                             $active = ($page == $key) ? 'active' : '';
                             echo "<li class='nav-item'><a class='nav-link $active' href='index.php?page=$key'>$value</a></li>";
@@ -304,8 +331,8 @@
       
         ?>
     </div>
-
-
+    <div id="successBar" class=" bg-success text-center text-white align-middle" role="alert">
+    </div>
     <?php include 'footer.php'; ?>
 
    
