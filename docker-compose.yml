@@ -3,10 +3,42 @@ version: '3.3'
 services:
   apache:
     build:
-       context: . 
-       dockerfile: Dockerfile
+      context: . 
+      dockerfile: Dockerfile
     ports:
       - "8000:80"
     volumes:
       - ./src:/var/www/html
       - ./apache_init/php.ini:/usr/local/etc/php/php.ini
+    command: >
+      bash -c "cd /var/www/html && composer require aws/aws-sdk-php && apache2-foreground"
+    networks:
+      custom_network:
+        ipv4_address: 10.10.10.2
+
+  minio:
+    image: minio/minio:RELEASE.2024-06-13T22-53-53Z-cpuv1
+    container_name: minio
+    environment:
+      MINIO_ROOT_USER: ROOT
+      MINIO_ROOT_PASSWORD: ROOTPASSWORD
+    expose:
+      - 9000
+    ports:
+      - "5001:9001"
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    networks:
+      custom_network:
+        ipv4_address: 10.10.10.3
+
+volumes:
+  minio_data:
+
+networks:
+  custom_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.10.0/16
