@@ -239,6 +239,26 @@
             margin: 5px;
         }
 
+        .table .description {
+            max-width: 250px; /* Adjust the width as needed */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+        }
+
+        .table .description:hover {
+            overflow: visible;
+            white-space: normal;
+            position: relative;
+            z-index: 1;
+            background-color: #f8f9fa;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .tooltip-container{
+            cursor:help;
+        }
         @media (max-width: 576px) {
             .action-column .btn {
                 display: block;
@@ -312,7 +332,7 @@
                     <ul class="navbar-nav">
                         <?php
                         $page = isset($_GET['page']) ? $_GET['page'] : 'main';
-                        $pages = ['main' => 'Main', 'datasets' => 'Datasets', 'console' => 'SDE Console', 'monitoring' => 'Monitoring', 'experiments'=>'Experiments'];
+                        $pages = ['main' => 'Main', 'datasets' => 'Datasets', 'clusters'=>"Clusters", 'console' => 'SDE Console', 'monitoring' => 'Monitoring', 'experiments'=>'Experiments'];
                         foreach ($pages as $key => $value) {
                             $active = ($page == $key) ? 'active' : '';
                             echo "<li class='nav-item'><a class='nav-link $active' href='index.php?page=$key'>$value</a></li>";
