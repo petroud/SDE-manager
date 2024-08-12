@@ -73,8 +73,10 @@ function getExperiments($s3) {
                         </div>
                         <div class="form-group">
                             <label for="sde_cluster">SDE Cluster:</label>
-                            <input type="text" class="form-control" id="sde_cluster" name="sde_cluster" required>
-                            </div>
+                            <select class="form-control selectpicker" id="sde_cluster" name="sde_cluster" required>
+                                <option value="">Select a cluster...</option>
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-primary custom-browse-btn">Add Experiment</button>
                     </form>
                 </div>
@@ -84,6 +86,22 @@ function getExperiments($s3) {
 
     <script>
         $(document).ready(function() {
+            $.ajax({
+                url: 'clusters/get_clusters.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    var select = $('#sde_cluster');
+                    $.each(response, function(index, cluster) {
+                        select.append('<option value="'+cluster.uid+'">'+cluster.name+' - '+cluster.apiserviceaddr+'</option>');
+                    });
+                    select.selectpicker('refresh'); // Refresh the selectpicker to apply the Bootstrap styles
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error loading clusters:', error);
+                }
+            });
+
             function loadExperiments() {
                 $.ajax({
                     type: 'GET',
@@ -98,10 +116,10 @@ function getExperiments($s3) {
                                 '<td data-label="Experiment Name">' + experiment.name + '</td>' +
                                 '<td data-label="Date Created">' + experiment.date_created + '</td>' +
                                 '<td data-label="Description">' + experiment.description + '</td>' +
-                                '<td data-label="SDE Cluster">' + experiment.sde_cluster + '</td>' +
+                                '<td data-label="SDE Cluster">'+'<div class="tooltip-container"> <span data-toggle="tooltip" data-placement="top" title="' + experiment.cluster_ip + '">' + experiment.cluster_name + '</span></div></td>' +
                                 '<td class="action-column">' +
                                 '<button class="btn btn-info btn-sm custom-browse-btn view-button">' +
-                                '<i class="fa fa-eye" style="color: white;"></i>' +
+                                '<i class="fa-solid fa-box-open" style="color: white;"></i>' +
                                 '</button>' +
                                 '<button class="btn btn-danger btn-sm custom-upload-btn delete-button" data-uid="' + experiment.uid + '">' +
                                 '<i class="fa fa-trash"></i>' +
@@ -167,7 +185,7 @@ function getExperiments($s3) {
                             if (result.success) {
                                 // Remove the row from the table
                                 $('tr[data-uid="' + experimentUID + '"]').remove();
-                                showErrorBar('Experiment deleted!');
+                                showSuccessBar('Experiment deleted!');
 
                             } else {
                                 showErrorBar('Failed to delete the experiment');
